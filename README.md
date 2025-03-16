@@ -6,8 +6,6 @@ There are many ways to acheive it; we're looking to see simplicity, reuasbility 
 ## What
 In this repository there is a simple C++ code that would break a single line to multiple lines. The end result would having an nginx instance running in a docker container that would read from the output of the "message" file and present it to users when they log in.
 
-You will need to explain exactly what do I need to do in order to show the ouytput on an nginx container.
-
 __Don't create an online instance__, a dockerfile that can handle this is more than enough, but we would need instructions how to set it up and run it.
 ## How
 ___Create your own fork___ with a combination of git actions, scripting and simple text instructions are enough.
