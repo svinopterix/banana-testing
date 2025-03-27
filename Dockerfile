@@ -1,9 +1,7 @@
 FROM nginx:stable
 
 COPY message .
-COPY ReadLineWords .
-
-RUN ls -la
+COPY --chmod=0755 ReadLineWords .
 
 RUN ./ReadLineWords > /usr/share/nginx/html/index.html
 
