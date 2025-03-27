@@ -1,0 +1,41 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  check_changes:
+    runs-on: ubuntu-22.04
+    outputs:
+      cpp_hpp_changed: ${{ steps.filter.outputs.cpp_hpp }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for changes in .cpp and .hpp files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            cpp_hpp:
+              - '**/*.cpp'
+              - '**/*.hpp'    
+  build_cpp:
+    runs-on: ubuntu-22.04
+    if: needs.check_changes.outputs.cpp_hpp_changed == 'true'    
+    steps:
+    - uses: actions/checkout@v4
+    - name: prepare
+      run: mkdir build
+    - name: cmake
+      run: cmake ..
+      working-directory: build/
+    - name: make
+      run: make
+      working-directory: ./build
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: build/
+        retention-days: 2
