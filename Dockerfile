@@ -1,11 +1,9 @@
 FROM nginx:stable
 
-COPY message /tmp/
-COPY ReadLineWords /tmp/
+COPY message .
+COPY ReadLineWords .
 
-WORKDIR /tmp
-
-RUN /tmp/ReadLineWords > /usr/share/nginx/html/index.html
+RUN ReadLineWords > /usr/share/nginx/html/index.html
 
 EXPOSE 80
 
