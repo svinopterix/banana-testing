@@ -20,7 +20,7 @@ jobs:
               - '**/*.hpp'    
   build_cpp:
     runs-on: ubuntu-22.04
-    if: needs.check_changes.outputs.cpp_hpp_changed == 'true'    
+    if: needs.check_changes.outputs.cpp_hpp_changed == 'true'
     steps:
     - uses: actions/checkout@v4
     - name: prepare
@@ -39,7 +39,6 @@ jobs:
         retention-days: 2
 
   build_nginx_docker:
-    needs: build_cpp
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
