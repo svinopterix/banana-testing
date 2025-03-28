@@ -41,7 +41,7 @@ jobs:
           
       - name: Build image
         run: |
-          docker build -t banana-testing:latest .
+          docker build -t ${{ secrets.BANANA_TESTING_USERNAME }}/banana-testing-svinopterix:latest .
           docker tag ${{ secrets.BANANA_TESTING_USERNAME }}/banana-testing-svinopterix:latest ${{ secrets.BANANA_TESTING_USERNAME }}/banana-testing-svinopterix:${{ github.ref_name }}-${{ github.run_number }}
 
 
