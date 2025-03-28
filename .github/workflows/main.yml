@@ -2,25 +2,8 @@ name: C/C++ CI
 
 on: [push]
 jobs:
-  check_changes:
-    runs-on: ubuntu-22.04
-    outputs:
-      cpp_hpp_changed: ${{ steps.filter.outputs.cpp_hpp }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Check for changes in .cpp and .hpp files
-        id: filter
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            cpp_hpp:
-              - '**/*.cpp'
-              - '**/*.hpp'    
   build_cpp:
     runs-on: ubuntu-22.04
-    if: needs.check_changes.outputs.cpp_hpp_changed == 'true'
     steps:
     - uses: actions/checkout@v4
     - name: prepare
@@ -40,6 +23,7 @@ jobs:
 
   build_nginx_docker:
     runs-on: ubuntu-22.04
+    needs: build_cpp
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
