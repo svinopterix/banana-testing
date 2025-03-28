@@ -6,14 +6,18 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
+
     - name: prepare
       run: mkdir build
+
     - name: cmake
       run: cmake ..
       working-directory: build/
+
     - name: make
       run: make
-      working-directory: ./build
+      working-directory: build/
+
     - name: Archive build artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -49,3 +53,10 @@ jobs:
         run: |
           docker push ${{ secrets.BANANA_TESTING_USERNAME }}/banana-testing-svinopterix:latest
           docker push ${{ secrets.BANANA_TESTING_USERNAME }}/banana-testing-svinopterix:${{ github.ref_name }}-${{ github.run_number }}
+
+      - name: Set summary
+        env:
+          REPO_NAME:  ${{ secrets.BANANA_TESTING_USERNAME }}/banana-testing-svinopterix
+          IMAGE_NAME: ${{ github.ref_name }}-${{ github.run_number }}
+        run: |
+          echo "### 🚀 How to run: docker run -p 80:80 $REPO_NAME:$IMAGE_NAME" >> $GITHUB_STEP_SUMMARY
