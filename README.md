@@ -1,4 +1,18 @@
 # Testing
+
+## How to run
+To execute the app do the folowing:
+1. Under _Actions_ tab identify the build needed, make sure it's successfull.
+2. Click on the build name and under _build_nginx_docker summary_ section you will find a docker command to execute:
+```
+docker run -p 80:80 svinopterix/banana-testing-svinopterix:<version>
+```
+Run the command
+3. Check that the nginx output:
+```
+curl http://localhost
+```
+
 ## Why
 This is a simple task that should take no more than a few hours to complete. Its representing an every-day task that you might be tasked to do.
 
